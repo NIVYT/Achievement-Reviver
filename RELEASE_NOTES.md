@@ -1,33 +1,36 @@
 # Release Notes
 
-All notable changes to **Achievement Reviver** will be documented in this file.
-This project adheres to [Semantic Versioning](https://semver.org/).
+All notable changes to **Achievement Reviver** are documented below.
 
 ---
 
 ## [2.0.0] - 2026-09-04
 
-### Major Update & Reliability Overhaul
+<div align="center">
 
-Version 2.0 brings major stability improvements, UI enhancements, and safeguards to guarantee seamless world revival across all Windows Minecraft Bedrock installations.
+![Build](https://img.shields.io/badge/Release-v2.0.0-6366f1?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?style=flat-square&logo=windows)
+![Minecraft](https://img.shields.io/badge/Minecraft-Bedrock-5C8A32?style=flat-square&logo=minecraft)
 
-#### New Features & Improvements
-- **Real World Thumbnails:** Integrated automatic extraction and rendering of `world_icon.jpeg` thumbnails for all detected Bedrock worlds.
-- **Active Process Safeguard:** Automatically detects if `Minecraft.Windows.exe` is currently running before attempting any mutations, preventing save file locks and autosave overwrites.
-- **`level.dat_old` Synchronization:** Synchronizes modifications to `level.dat_old` (with backup) to prevent Minecraft from rolling back survival state on load.
-- **On-Demand World Refresh:** Added an interactive `Refresh` button in the UI to reload worlds instantly without restarting the application.
-- **Drag & Window Controls Optimization:** Decoupled titlebar drag regions from window controls, guaranteeing 100% responsive minimize and close interactions in WebView2.
-- **Unsigned Short Handling:** Fixed NBT short unpack handling to unsigned format (`<H`) for tag string length headers.
-- **Installer & Spec v2.0:** Updated PyInstaller spec and Inno Setup configuration for automated compilation into `Achievement_Reviver_Setup_v2.0.exe`.
+</div>
+
+### Highlights
+
+| Feature | Description |
+| :--- | :--- |
+| 🖼️ **World Thumbnails** | Automatically loads in-game screenshots (`world_icon.jpeg`) |
+| 🔒 **Process Guard** | Halts if `Minecraft.Windows.exe` is running to prevent file locks |
+| 🔄 **Rollback Proof** | Syncs both `level.dat` and `level.dat_old` with `.bak` safety backups |
+| 🔍 **Dual Scanner** | Auto-detects saves from both Bedrock GDK & classic Store UWP |
+| ⚡ **Zero Latency** | Custom Little-Endian NBT stream patcher (<1ms execution) |
+
+> [!TIP]
+> Close Minecraft before reviving a world to avoid file access conflicts.
 
 ---
 
 ## [1.0.0] - 2026-09-04
 
-### Initial Release
-
-- **Inline Little-Endian NBT Engine:** Parses and modifies Bedrock `level.dat` files in-place with zero external binary dependencies and sub-millisecond execution.
-- **Achievement Restoration:** Automatically clears `hasBeenLoadedInCreative`, `cheatsEnabled`, `commandsEnabled`, sets `GameType` to `0` (Survival), and sets `ForceGameType` to `1`.
-- **Dual World Scanner:** Automatically detects worlds saved via both Bedrock GDK (`%APPDATA%\Minecraft Bedrock\Users`) and classic Microsoft Store UWP (`%LOCALAPPDATA%\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState`).
-- **Failsafe Automatic Backups:** Creates `level.dat.bak` copy prior to any byte mutation.
-- **Modern Desktop UI:** Frameless `pywebview` interface with Edge WebView2, skeleton animations, and system tray integration.
+- Initial release with inline Little-Endian NBT patching engine.
+- Bedrock flag resets: `hasBeenLoadedInCreative`, `cheatsEnabled`, `commandsEnabled`, and Survival mode lock.
+- PyInstaller and Inno Setup build configurations.
